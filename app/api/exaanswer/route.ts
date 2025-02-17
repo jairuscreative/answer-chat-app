@@ -29,6 +29,9 @@ export async function POST(req: NextRequest) {
       async start(controller) {
         try {
           for await (const chunk of stream) {
+            // Log the chunk for debugging
+            console.log('Received chunk:', chunk);
+            
             // Format the chunk to match the expected structure
             const formattedChunk = {
               choices: [{
@@ -38,8 +41,9 @@ export async function POST(req: NextRequest) {
               }]
             };
             
-            // If there are citations, include them separately
-            if (chunk.citations) {
+            // If there are citations, send them as a separate chunk
+            if (chunk.citations && chunk.citations.length > 0) {
+              console.log('Sending citations:', chunk.citations);
               controller.enqueue(encoder.encode(JSON.stringify({ citations: chunk.citations }) + '\n'));
             }
             
@@ -48,6 +52,7 @@ export async function POST(req: NextRequest) {
           }
           controller.close();
         } catch (error) {
+          console.error('Streaming error:', error);
           controller.error(error);
         }
       },

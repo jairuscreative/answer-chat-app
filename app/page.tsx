@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef } from 'react';
 import MessageContent from './component/MessageContent';
 import Citation from './component/Citation';
 
@@ -79,6 +79,14 @@ export default function Page() {
             const data = JSON.parse(line);
             if (data.citations) {
               citations = data.citations;
+              // Update message with new citations immediately
+              setMessages(prev => 
+                prev.map(msg => 
+                  msg.id === assistantMessage.id 
+                    ? { ...msg, citations: data.citations } 
+                    : msg
+                )
+              );
             } else if (data.choices?.[0]?.delta?.content) {
               content += data.choices[0].delta.content;
               setMessages(prev => 
@@ -173,11 +181,7 @@ export default function Page() {
                     <MessageContent content={message.content} />
                   </div>
                   {message.citations && message.citations.length > 0 && (
-                    <div className="mt-4 space-y-2">
-                      {message.citations.map((citation) => (
-                        <Citation key={citation.id} citation={citation} />
-                      ))}
-                    </div>
+                    <Citation citations={message.citations} />
                   )}
                 </div>
               </div>
@@ -231,9 +235,9 @@ export default function Page() {
           {!hasMessages && (
             <div className="text-center mt-6 text-gray-600 text-sm">
               <span> powered by </span>
-                <a href="https://exa.ai" target="_blank" className="underline hover:text-[var(--brand-default)]">
-                  Exa - The Web Search API 
-                </a>
+              <a href="https://exa.ai" target="_blank" className="underline hover:text-[var(--brand-default)]">
+                Exa - The Web Search API 
+              </a>
             </div>
           )}
         </div>

@@ -1,53 +1,68 @@
-import React from 'react';
-
-interface Citation {
-  id: string;
-  url: string;
-  title: string;
-  author?: string;
-  publishedDate?: string;
-  snippet: string;
-}
+import { useState } from 'react';
 
 interface CitationProps {
-  citation: Citation;
+  citations: any[];
 }
 
-const Citation: React.FC<CitationProps> = ({ citation }) => {
+export default function Citation({ citations }: CitationProps) {
+  const [isExpanded, setIsExpanded] = useState(true);
+
+  // Debug log
+  console.log('Citation component received:', citations);
+
+  if (!citations || citations.length === 0) {
+    console.log('No citations to display');
+    return null;
+  }
+
   return (
-    <div className="mt-4 p-4 border border-gray-200 rounded-lg bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all duration-200">
-      <a 
-        href={citation.url} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="block space-y-2"
-      >
-        <h3 className="text-[15px] font-medium text-[var(--brand-default)] hover:text-[var(--brand-muted)] transition-colors">
-          {citation.title}
-        </h3>
-        
-        <div className="flex items-center gap-2 text-xs text-gray-500">
-          {citation.author && (
-            <>
-              <span>{citation.author}</span>
-              <span>•</span>
-            </>
-          )}
-          {citation.publishedDate && (
-            <>
-              <span>{new Date(citation.publishedDate).toLocaleDateString()}</span>
-              <span>•</span>
-            </>
-          )}
-          <span className="truncate">{citation.url}</span>
+    <div className="mt-4 space-y-4">
+      {/* Header with logo */}
+      <div className="flex items-center gap-2">
+        <button 
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="flex items-center gap-2"
+        >
+          <svg 
+            className={`w-5 h-5 transform hover:text-[var(--brand-default)] transition-colors transition-transform ${isExpanded ? 'rotate-0' : '-rotate-180'}`} 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+          </svg>
+          <h3 className="text-md font-medium">Exa Search Results</h3>
+        </button>
+      </div>
+
+      {/* Results */}
+      {isExpanded && (
+        <div className="pl-4">
+          <div className="space-y-2">
+            {citations.map((citation, idx) => (
+              <div key={citation.id || idx} className="text-sm group relative">
+                <a href={citation.url} 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   className="text-gray-600 hover:text-[var(--brand-default)] flex items-center gap-2">
+                  [{idx + 1}] {citation.title || citation.url}
+                  {citation.favicon && (
+                    <img 
+                      src={citation.favicon} 
+                      alt=""
+                      className="w-4 h-4 object-contain"
+                    />
+                  )}
+                </a>
+                {/* URL tooltip */}
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute left-0 -bottom-6 bg-gray-800 text-white text-xs py-1 px-2 rounded whitespace-nowrap z-10 pointer-events-none">
+                  {citation.url}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-        
-        <p className="text-sm text-gray-700 line-clamp-2">
-          {citation.snippet}
-        </p>
-      </a>
+      )}
     </div>
   );
-};
-
-export default Citation; 
+} 
