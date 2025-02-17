@@ -5,8 +5,6 @@ interface CitationProps {
 }
 
 export default function Citation({ citations }: CitationProps) {
-  const [isExpanded, setIsExpanded] = useState(true);
-
   // Debug log
   console.log('Citation component received:', citations);
 
@@ -17,52 +15,37 @@ export default function Citation({ citations }: CitationProps) {
 
   return (
     <div className="mt-4 space-y-4">
-      {/* Header with logo */}
+      {/* Header */}
       <div className="flex items-center gap-2">
-        <button 
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center gap-2"
-        >
-          <svg 
-            className={`w-5 h-5 transform hover:text-[var(--brand-default)] transition-colors transition-transform ${isExpanded ? 'rotate-0' : '-rotate-180'}`} 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-          </svg>
-          <h3 className="text-md font-medium">Exa Search Results</h3>
-        </button>
+        <h3 className="text-md font-medium">Exa Search Results</h3>
       </div>
 
       {/* Results */}
-      {isExpanded && (
-        <div className="pl-4">
-          <div className="space-y-2">
-            {citations.map((citation, idx) => (
-              <div key={citation.id || idx} className="text-sm group relative">
-                <a href={citation.url} 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   className="text-gray-600 hover:text-[var(--brand-default)] flex items-center gap-2">
-                  [{idx + 1}] {citation.title || citation.url}
-                  {citation.favicon && (
-                    <img 
-                      src={citation.favicon} 
-                      alt=""
-                      className="w-4 h-4 object-contain"
-                    />
-                  )}
-                </a>
-                {/* URL tooltip */}
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute left-0 -bottom-6 bg-gray-800 text-white text-xs py-1 px-2 rounded whitespace-nowrap z-10 pointer-events-none">
-                  {citation.url}
-                </div>
+      <div className="pl-4">
+        <div className="space-y-2">
+          {citations.map((citation, idx) => (
+            <div key={citation.id || idx} className="text-sm group relative">
+              <a href={citation.url} 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 className="text-gray-600 hover:text-[var(--brand-default)] flex items-center gap-2">
+                [{idx + 1}] {citation.title || citation.url}
+                {citation.favicon && (
+                  <img 
+                    src={citation.favicon} 
+                    alt=""
+                    className="w-4 h-4 object-contain"
+                  />
+                )}
+              </a>
+              {/* URL tooltip */}
+              <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute left-0 -bottom-6 bg-gray-800 text-white text-xs py-1 px-2 rounded whitespace-nowrap z-10 pointer-events-none">
+                {citation.url}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 } 
