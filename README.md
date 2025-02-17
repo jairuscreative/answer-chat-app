@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💬 Exa Answer Chat App
+### Powered by [Exa](https://exa.ai) - The Web Search API
 
-## Getting Started
+An open-source chat app showcasing the power of Exa's Answer endpoint.
 
-First, run the development server:
+![Screenshot](https://answer.exa.ai/opengraph-image.jpg)
 
+### ✨ Try it yourself:
+- [Try the Answer Endpoint](https://dashboard.exa.ai/playground/answer?q=What%20makes%20some%20LLMs%20so%20much%20better%20than%20others%3F&filters=%7B%22model%22%3A%22exa-pro%22%7D) - Experience the Answer endpoint directly on Exa dashboard
+
+- [Live Demo](https://answer.exa.ai) - See the chat app in action
+
+<br>
+
+## 🎯 What is Exa Answer Chat App?
+
+Exa Answer Chat App is a free and open-source application that shows how to use Exa's Answer endpoint. It provides a modern chat interface with real-time streaming responses and citation support.
+
+<br>
+
+## 💻 Tech Stack
+- **Backend**: [Exa API](https://exa.ai) - Answer endpoint
+- **Frontend**: [Next.js](https://nextjs.org/docs) with App Router
+- **Styling**: [TailwindCSS](https://tailwindcss.com)
+- **Language**: TypeScript
+- **Hosting**: [Vercel](https://vercel.com/)
+
+<br>
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+ installed
+- Exa API key ([Get it here](https://dashboard.exa.ai/api-keys))
+
+### Installation
+
+1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/exa-labs/answer-chat-app.git
+cd answer-chat-app
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables
+```bash
+cp .env.example .env.local
+```
+Then add your Exa API key to `.env.local`:
+```
+EXA_API_KEY=your-api-key-here
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Run the development server
+```bash
+npm run dev
+```
 
-## Learn More
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-To learn more about Next.js, take a look at the following resources:
+<br>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⭐ About [Exa](https://exa.ai)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project showcases [Exa's](https://exa.ai) Answer endpoint, which provides:
 
-## Deploy on Vercel
+* Real-time streaming responses
+* High-quality answers with citations
+* Simple API integration (with OpenAI compatible API)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[Try Exa API](https://dashboard.exa.ai) today and build your own AI-powered applications!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<br>
+
+---
+
+Built with ❤️ using [Exa](https://exa.ai)
