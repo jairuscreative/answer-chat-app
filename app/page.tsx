@@ -51,10 +51,21 @@ export default function Page() {
 
     try {
       abortControllerRef.current = new AbortController();
+
+      // Format previous messages into conversation history
+      const conversationHistory = messages.map(msg => 
+        `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}`
+      ).join('\n');
+
+      // Combine history with new query
+      const fullQuery = conversationHistory 
+        ? `${conversationHistory}\nUser: ${input}`
+        : input;
+
       const response = await fetch('/api/exaanswer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: input }),
+        body: JSON.stringify({ query: fullQuery }),
         signal: abortControllerRef.current.signal,
       });
 
