@@ -1,8 +1,9 @@
 // app/api/exaanswer/route.ts
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import Exa from "exa-js";
 
 export const maxDuration = 60;
+export const dynamic = 'force-dynamic';
 
 const exa = new Exa(process.env.EXA_API_KEY as string);
 
@@ -11,19 +12,59 @@ export async function POST(req: NextRequest) {
     const { query } = await req.json();
 
     if (!query) {
-      return NextResponse.json({ error: 'query is required' }, { status: 400 });
+      return new Response(
+        JSON.stringify({ error: 'query is required' }), 
+        { status: 400 }
+      );
     }
 
-    const result = await exa.answer(
-        query,
-        {
-          model: "exa-pro",
-          stream: true
-        }
-    )
+    // Get the response from Exa
+    const stream = exa.streamAnswer(query, {
+      model: "exa-pro"
+    });
 
-    return NextResponse.json({ results: result});
-  } catch (error) {
-    return NextResponse.json({ error: `Failed to perform search | ${error}` }, { status: 500 });
+    // Set up the response headers
+    const encoder = new TextEncoder();
+    const customStream = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const chunk of stream) {
+            // Format the chunk to match the expected structure
+            const formattedChunk = {
+              choices: [{
+                delta: {
+                  content: chunk.content
+                }
+              }]
+            };
+            
+            // If there are citations, include them separately
+            if (chunk.citations) {
+              controller.enqueue(encoder.encode(JSON.stringify({ citations: chunk.citations }) + '\n'));
+            }
+            
+            // Send the content chunk
+            controller.enqueue(encoder.encode(JSON.stringify(formattedChunk) + '\n'));
+          }
+          controller.close();
+        } catch (error) {
+          controller.error(error);
+        }
+      },
+    });
+
+    // Return the streaming response
+    return new Response(customStream, {
+      headers: {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+      },
+    });
+  } catch (error: any) {
+    return new Response(
+      JSON.stringify({ error: `Failed to perform search | ${error.message}` }), 
+      { status: 500 }
+    );
   }
 }
