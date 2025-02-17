@@ -1,46 +1,47 @@
-// Helper function to convert URLs in text to clickable links
-const MessageContent = ({ content }: { content: string }) => {
-    // Regular expression to match URLs, including those in bullet points
-    const urlRegex = /(https?:\/\/[^\s•]+)/g;
+interface MessageContentProps {
+  content: string;
+}
+
+export default function MessageContent({ content }: MessageContentProps) {
+  // Function to process the content and format links
+  const formatContent = (text: string) => {
+    // Regular expression to match markdown-style links: [text](url)
+    const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
     
-    // Split content by newlines to handle bullet points
-    const lines = content.split('\n');
-    
-    return (
-      <>
-        {lines.map((line, lineIndex) => {
-          // Check if line is empty
-          if (!line.trim()) {
-            return <br key={lineIndex} />;
-          }
-  
-          // Split the line by URLs
-          const parts = line.split(urlRegex);
-          
-          return (
-            <div key={lineIndex} className="mb-1">
-              {parts.map((part, partIndex) => {
-                // Check if this part is a URL
-                if (part.match(urlRegex)) {
-                  return (
-                    <a
-                      key={partIndex}
-                      href={part}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[var(--brand-default)] hover:text-[var(--brand-muted)] underline"
-                    >
-                      {part}
-                    </a>
-                  );
-                }
-                return <span key={partIndex}>{part}</span>;
-              })}
-            </div>
-          );
-        })}
-      </>
-    );
+    // Split the text into parts (text and links)
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = linkRegex.exec(text)) !== null) {
+      // Add text before the link
+      if (match.index > lastIndex) {
+        parts.push(text.slice(lastIndex, match.index));
+      }
+
+      // Add the formatted link
+      parts.push(
+        <a
+          key={match.index}
+          href={match[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[var(--brand-default)] hover:underline"
+        >
+          {match[1]}
+        </a>
+      );
+
+      lastIndex = match.index + match[0].length;
+    }
+
+    // Add remaining text after last link
+    if (lastIndex < text.length) {
+      parts.push(text.slice(lastIndex));
+    }
+
+    return parts;
   };
-  
-  export default MessageContent; 
+
+  return <>{formatContent(content)}</>;
+} 

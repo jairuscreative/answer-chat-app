@@ -29,14 +29,33 @@ export async function POST(req: NextRequest) {
       async start(controller) {
         try {
           for await (const chunk of stream) {
-            // Log the chunk for debugging
-            console.log('Received chunk:', chunk);
-            
             // Format the chunk to match the expected structure
+            let formattedContent = chunk.content;
+
+            // If there are citations in this chunk, format any URLs to be more readable
+            if (chunk.citations && chunk.citations.length > 0) {
+              // Create a map of URLs to their titles
+              const urlToTitleMap = new Map(
+                chunk.citations.map(citation => [
+                  citation.url,
+                  citation.title || 'Source'
+                ])
+              );
+
+              // Replace full URLs with [title](url) format
+              Array.from(urlToTitleMap.entries()).forEach(([url, title]) => {
+                if (typeof url === 'string' && typeof formattedContent === 'string') {
+                  const escapedUrl = url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                  const regex = new RegExp(`\\(${escapedUrl}\\)`, 'g');
+                  formattedContent = formattedContent.replace(regex, `[${title}](${url})`);
+                }
+              });
+            }
+
             const formattedChunk = {
               choices: [{
                 delta: {
-                  content: chunk.content
+                  content: formattedContent || chunk.content
                 }
               }]
             };
