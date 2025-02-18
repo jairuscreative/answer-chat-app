@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     description: "An opensource chat application built with Exa Answer endpoint.",
     images: ["https://demo.exa.ai/answer/opengraph-image.jpg"]
   },
-  metadataBase: new URL("https://demo.exa.ai/answer/"),
+  metadataBase: new URL("https://demo.exa.ai/answer"),
   robots: {
     index: true,
     follow: true

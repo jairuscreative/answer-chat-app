@@ -60,7 +60,7 @@ EXA_API_KEY=your-api-key-here
 npm run dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
+5. Open [http://localhost:3000/answer](http://localhost:3000/answer) in your browser
 
 <br>
 

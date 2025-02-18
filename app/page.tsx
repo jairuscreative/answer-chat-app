@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import MessageContent from './component/MessageContent';
 import Citation from './component/Citation';
+import { getAssetPath } from './utils';
 
 interface Message {
   id: string;
@@ -62,7 +63,7 @@ export default function Page() {
         ? `${conversationHistory}\nUser: ${input}`
         : input;
 
-      const response = await fetch('/api/exaanswer', {
+      const response = await fetch(getAssetPath('/api/exaanswer'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: fullQuery }),
