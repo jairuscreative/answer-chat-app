@@ -226,9 +226,10 @@ export default function Page() {
             <input
               value={input}
               onChange={handleInputChange}
+              autoFocus
               placeholder="Ask something..."
               className="w-full p-4 pr-[130px] bg-white border border-gray-200 rounded-full shadow-sm 
-              focus:outline-none focus:ring-2 focus:ring-[var(--brand-default)] focus:ring-opacity-20 
+              focus:outline-none focus:ring-1 focus:ring-[var(--brand-default)] focus:ring-opacity-20 
               focus:border-[var(--brand-default)] text-base transition-all duration-200 
               placeholder:text-gray-400 hover:border-gray-300"
             />
