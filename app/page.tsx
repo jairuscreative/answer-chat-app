@@ -150,7 +150,7 @@ export default function Page() {
           </a>
           <a
             href="mail:team@tulsaanswers.com"
-            target="_blank"
+            
             className="flex items-center gap-1.5 text-md text-gray-600 hover:text-[var(--brand-default)] transition-colors"
           >
             <span className="underline">Contact Us</span>
@@ -246,9 +246,9 @@ export default function Page() {
           </form>
           {!hasMessages && (
             <div className="text-center mt-6 text-gray-600 text-sm">
-              <span> powered by </span>
-              <a href="https://exa.ai" target="_blank" className="underline hover:text-[var(--brand-default)]">
-                Exa - The Web Search API 
+              <span> sponsored by </span>
+              <a href="https://jairuscreative.com" target="_blank" className="underline hover:text-[var(--brand-default)]">
+                Jairus Creative
               </a>
             </div>
           )}
