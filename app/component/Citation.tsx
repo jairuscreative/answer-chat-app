@@ -17,7 +17,7 @@ export default function Citation({ citations }: CitationProps) {
     <div className="mt-4 space-y-4">
       {/* Header */}
       <div className="flex items-center gap-2">
-        <h3 className="text-md font-medium">Exa Search Results</h3>
+        <h3 className="text-md font-medium">Search Results</h3>
       </div>
 
       {/* Results */}
