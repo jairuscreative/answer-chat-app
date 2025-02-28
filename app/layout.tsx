@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "https://demo.exa.ai/answer/opengraph-image.jpg",
+        url: "https://answer-chat-app-one.vercel.app/app/tulsasanswers-screenshot.png",
         width: 1200,
         height: 630,
         alt: "TulsaAnswers – Real Answers, Right Now."
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "TulsaAnswers | Tulsa’s Smartest Search Engine – Find Answers Instantly!",
     description: "TulsaAnswers.com is your go-to platform for instant, real-time answers powered by advanced web search technology. Whether you're looking for local insights, business information, or quick solutions, our AI-driven search delivers the most accurate and up-to-date results—faster than ever.",
-    images: ["https://demo.exa.ai/answer/opengraph-image.jpg"]
+    images: ["https://answer-chat-app-one.vercel.app/app/tulsasanswers-screenshot.png"]
   },
   metadataBase: new URL("https://tulsaanswers.com"),
   robots: {
