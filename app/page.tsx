@@ -146,14 +146,14 @@ export default function Page() {
             rounded-full hover:bg-[var(--brand-default)] hover:text-white transition-all duration-200 
             font-medium shadow-sm hover:shadow-md hover:-translate-y-0.5"
           >
-            <span className="text-sm">Tulsa Answers</span>
+            <span className="text-sm">TulsaAnswers.com</span>
           </a>
           <a
-            href="mail:team@tulsaanswers.com"
+            href="https://instagram.com/tulsaanswers"
             
             className="flex items-center gap-1.5 text-md text-gray-600 hover:text-[var(--brand-default)] transition-colors"
           >
-            <span className="underline">Contact Us</span>
+            <span className="underline">Follow Us</span>
             <svg
               className="w-3.5 h-3.5"
               fill="none"
@@ -249,7 +249,7 @@ export default function Page() {
               <span> sponsored by </span>
               <a href="https://jairuscreative.com" target="_blank" className="underline hover:text-[var(--brand-default)]">
                 Jairus Creative
-              </a>
+              </a> - your favorite local creative agency!
             </div>
           )}
         </div>
