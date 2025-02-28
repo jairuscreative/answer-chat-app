@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-    basePath: "/answer",
+    basePath: "",
     experimental: {
       serverActions: {
         allowedOrigins: ["demo.exa.ai"],
