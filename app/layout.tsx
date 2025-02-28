@@ -22,7 +22,7 @@ const reckless = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Exa Answer Chat App",
+  title: "Get Answered at TulsaAnswers.com",
   description: "An opensource chat application built with Exa Answer endpoint.",
   openGraph: {
     title: "Exa Answer Chat App",
