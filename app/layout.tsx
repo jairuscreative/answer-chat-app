@@ -22,11 +22,11 @@ const reckless = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Get Answered at TulsaAnswers.com",
-  description: "An opensource chat application built with Exa Answer endpoint.",
+  title: "TulsaAnswers | Tulsa’s Smartest Search Engine – Find Answers Instantly!",
+  description: "TulsaAnswers.com is your go-to platform for instant, real-time answers powered by advanced web search technology. Whether you're looking for local insights, business information, or quick solutions, our AI-driven search delivers the most accurate and up-to-date results—faster than ever.",
   openGraph: {
-    title: "Exa Answer Chat App",
-    description: "An opensource chat application built with Exa Answer endpoint.",
+    title: "TulsaAnswers | Tulsa’s Smartest Search Engine – Find Answers Instantly!",
+    description: "TulsaAnswers.com is your go-to platform for instant, real-time answers powered by advanced web search technology. Whether you're looking for local insights, business information, or quick solutions, our AI-driven search delivers the most accurate and up-to-date results—faster than ever.",
     type: "website",
     locale: "en_US",
     images: [
@@ -34,17 +34,17 @@ export const metadata: Metadata = {
         url: "https://demo.exa.ai/answer/opengraph-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Exa Answer Chat App"
+        alt: "TulsaAnswers – Real Answers, Right Now."
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Exa Answer Chat App",
-    description: "An opensource chat application built with Exa Answer endpoint.",
+    title: "TulsaAnswers | Tulsa’s Smartest Search Engine – Find Answers Instantly!",
+    description: "TulsaAnswers.com is your go-to platform for instant, real-time answers powered by advanced web search technology. Whether you're looking for local insights, business information, or quick solutions, our AI-driven search delivers the most accurate and up-to-date results—faster than ever.",
     images: ["https://demo.exa.ai/answer/opengraph-image.jpg"]
   },
-  metadataBase: new URL("https://demo.exa.ai/answer"),
+  metadataBase: new URL("https://tulsaanswers.com"),
   robots: {
     index: true,
     follow: true
