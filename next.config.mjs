@@ -2,6 +2,7 @@
 
 const nextConfig = {
     basePath: "",
+    reactStrictMode: true,
     experimental: {
       serverActions: {
         allowedOrigins: ["demo.exa.ai"],
